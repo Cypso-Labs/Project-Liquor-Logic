@@ -1,7 +1,8 @@
-package com.liquorlogic.itemservice.controller;
+package com.liquorlogic.posservice.controller;
 
-import com.liquorlogic.itemservice.entity.Item;
-import com.liquorlogic.itemservice.service.ItemService;
+
+import com.liquorlogic.posservice.entity.Item;
+import com.liquorlogic.posservice.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-/**
- * @author CypsoLabs
- */
+
 @RestController
 @RequestMapping("/api/item")
 @RequiredArgsConstructor

@@ -1,14 +1,15 @@
-package com.liquorlogic.itemservice.service;
+package com.liquorlogic.posservice.service;
 
-import com.liquorlogic.itemservice.entity.Item;
+
+
+import com.liquorlogic.posservice.entity.Item;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-/**
- * @author CypsoLabs
- */
+
+
 public interface ItemService {
     List<Item> getAllItem();
     Item saveItem (Item item);

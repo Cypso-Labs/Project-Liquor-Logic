@@ -1,4 +1,4 @@
-package com.liquorlogic.itemservice.entity;
+package com.liquorlogic.posservice.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,9 +9,7 @@ import lombok.ToString;
 import java.util.Date;
 import java.util.UUID;
 
-/**
- * @author CypsoLabs
- */
+
 @Data
 @Entity
 @ToString

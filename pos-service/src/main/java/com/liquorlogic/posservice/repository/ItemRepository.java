@@ -1,13 +1,13 @@
-package com.liquorlogic.itemservice.repository;
+package com.liquorlogic.posservice.repository;
 
-import com.liquorlogic.itemservice.entity.Item;
+
+import com.liquorlogic.posservice.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;
 import java.util.UUID;
-/**
- * @author CypsoLabs
- */
+
+
 public interface ItemRepository extends JpaRepository<Item, UUID> {
     Item findBySKU(String sku);
 

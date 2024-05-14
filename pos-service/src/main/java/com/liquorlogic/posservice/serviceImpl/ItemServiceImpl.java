@@ -1,8 +1,9 @@
-package com.liquorlogic.itemservice.serviceImpl;
+package com.liquorlogic.posservice.serviceImpl;
 
-import com.liquorlogic.itemservice.entity.Item;
-import com.liquorlogic.itemservice.repository.ItemRepository;
-import com.liquorlogic.itemservice.service.ItemService;
+
+import com.liquorlogic.posservice.entity.Item;
+import com.liquorlogic.posservice.repository.ItemRepository;
+import com.liquorlogic.posservice.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,9 +12,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-/**
- * @author CypsoLabs
- */
+
+
 @Service
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
