@@ -1,9 +1,10 @@
-package com.liquorlogic.orderservice.serviceImpl;
+package com.liquorlogic.posservice.serviceImpl;
 
-import com.liquorlogic.orderservice.entity.Order;
-import com.liquorlogic.orderservice.enums.Status;
-import com.liquorlogic.orderservice.repository.OrderRepository;
-import com.liquorlogic.orderservice.service.OrderService;
+
+import com.liquorlogic.posservice.entity.Order;
+import com.liquorlogic.posservice.enums.OrderStatus;
+import com.liquorlogic.posservice.repository.OrderRepository;
+import com.liquorlogic.posservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-/**
- * @author CypsoLabs
- */
+
+
 @Service
 @RequiredArgsConstructor
 
@@ -60,7 +60,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order findByStatus(Status status) {
+    public Order findByStatus(OrderStatus status) {
         return orderRepository.findByStatus(status);
     }
 

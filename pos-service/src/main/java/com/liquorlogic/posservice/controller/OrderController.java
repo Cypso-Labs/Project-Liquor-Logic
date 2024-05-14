@@ -1,8 +1,9 @@
-package com.liquorlogic.orderservice.controller;
+package com.liquorlogic.posservice.controller;
 
-import com.liquorlogic.orderservice.entity.Order;
-import com.liquorlogic.orderservice.enums.Status;
-import com.liquorlogic.orderservice.service.OrderService;
+
+import com.liquorlogic.posservice.entity.Order;
+import com.liquorlogic.posservice.enums.OrderStatus;
+import com.liquorlogic.posservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-/**
- * @author CypsoLabs
- */
+
+
 @RestController
 @RequestMapping("/api/order")
 @RequiredArgsConstructor
@@ -48,7 +48,7 @@ public class OrderController {
             order.setQty(Integer.parseInt(credentials.get("qty")));
             order.setTotalAmount(Double.parseDouble(credentials.get("totalAmount")));
             order.setShippingAddress(credentials.get("shippingAddress"));
-            order.setStatus(Status.valueOf(credentials.get("status")));
+            order.setStatus(OrderStatus.valueOf(credentials.get("status")));
 
 
 
@@ -184,7 +184,7 @@ public class OrderController {
     }
 
     @PostMapping("/status")
-    public ResponseEntity<Order> findByStatus (@RequestParam Status status){
+    public ResponseEntity<Order> findByStatus (@RequestParam OrderStatus status){
         loggerLog4J.info("Start findByStatus");
         try {
             loggerLog4J.info("End findByStatus");

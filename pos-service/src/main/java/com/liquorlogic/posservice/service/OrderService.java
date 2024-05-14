@@ -1,15 +1,16 @@
-package com.liquorlogic.orderservice.service;
+package com.liquorlogic.posservice.service;
 
-import com.liquorlogic.orderservice.entity.Order;
-import com.liquorlogic.orderservice.enums.Status;
+
+
+import com.liquorlogic.posservice.entity.Order;
+import com.liquorlogic.posservice.enums.OrderStatus;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-/**
- * @author CypsoLabs
- */
+
+
 public interface OrderService {
     Order saveOrder (Order order);
     List<Order> getAllOrder();
@@ -18,6 +19,6 @@ public interface OrderService {
     Order findByCustomerId (UUID customerId);
     Order findByItemId (UUID itemId);
     Order findByEmployeeId (UUID employeeId);
-    Order findByStatus (Status status);
+    Order findByStatus (OrderStatus status);
     Order findByCreateDate (Date createDate);
 }

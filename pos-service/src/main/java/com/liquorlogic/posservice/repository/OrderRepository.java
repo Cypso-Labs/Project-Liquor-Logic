@@ -1,15 +1,14 @@
-package com.liquorlogic.orderservice.repository;
+package com.liquorlogic.posservice.repository;
 
-import com.liquorlogic.orderservice.entity.Order;
-import com.liquorlogic.orderservice.enums.Status;
+
+import com.liquorlogic.posservice.entity.Order;
+import com.liquorlogic.posservice.enums.OrderStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;
 import java.util.UUID;
 
-/**
- * @author CypsoLabs
- */
+
 public interface OrderRepository extends JpaRepository<Order, UUID> {
     Order findByCustomerId(UUID customerId);
 
@@ -17,7 +16,7 @@ public interface OrderRepository extends JpaRepository<Order, UUID> {
 
     Order findByEmployeeId(UUID employeeId);
 
-    Order findByStatus(Status status);
+    Order findByStatus(OrderStatus status);
 
     Order findByCreateDate(Date createDate);
 }
