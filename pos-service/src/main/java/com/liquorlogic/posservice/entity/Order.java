@@ -1,6 +1,7 @@
-package com.liquorlogic.orderservice.entity;
+package com.liquorlogic.posservice.entity;
 
-import com.liquorlogic.orderservice.enums.Status;
+
+import com.liquorlogic.posservice.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,9 +11,7 @@ import lombok.ToString;
 import java.util.Date;
 import java.util.UUID;
 
-/**
- * @author CypsoLabs
- */
+
 @Data
 @Entity
 @ToString
@@ -41,5 +40,5 @@ public class Order {
     @Column(name = "SHIPPING_ADDRESS")
     private String shippingAddress;
     @Column(name = "STATUS")
-    private Status status;
+    private OrderStatus status;
 }
