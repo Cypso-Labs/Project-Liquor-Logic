@@ -45,18 +45,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order findByCustomerId(UUID customerId) {
-        return orderRepository.findByCustomerId(customerId);
-    }
-
-    @Override
     public Order findByItemId(UUID itemId) {
         return orderRepository.findByItemId(itemId);
     }
 
     @Override
-    public Order findByEmployeeId(UUID employeeId) {
-        return orderRepository.findByEmployeeId(employeeId);
+    public Order findByUserId(UUID userId) {
+        return orderRepository.findByUserId(userId);
     }
 
     @Override
@@ -67,6 +62,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order findByCreateDate(Date createDate) {
         return orderRepository.findByCreateDate(createDate);
+    }
+
+    @Override
+    public Order findByUpdateDate(Date updateDate) {
+        return orderRepository.findByUpdateDate(updateDate);
     }
 }
 

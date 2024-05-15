@@ -23,12 +23,10 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID orderId;
-    @Column(name = "CUSTOMER_ID")
-    private UUID customerId;
     @Column(name = "ITEM_ID")
     private UUID itemId;
-    @Column(name = "EMPLOYEE_ID")
-    private UUID employeeId;
+    @Column(name = "USER_ID")
+    private UUID userId;
     @Column(name = "QTY")
     private int qty;
     @Column(name = "CREATE_DATE")
@@ -37,8 +35,6 @@ public class Order {
     private Date updateDate;
     @Column(name = "TOTAL_AMOUNT")
     private Double totalAmount;
-    @Column(name = "SHIPPING_ADDRESS")
-    private String shippingAddress;
     @Column(name = "STATUS")
     private OrderStatus status;
 }

@@ -9,24 +9,17 @@ import java.util.UUID;
 
 
 public interface ItemRepository extends JpaRepository<Item, UUID> {
-    Item findBySKU(String sku);
-
     Item findByUnitPrice(Double unitPrice);
 
     Item findByName(String name);
 
-
     Item findBySupplierId(UUID supplierId);
-
-    Item findByBrandId(UUID brandId);
-
-    Item findByCategoryId(UUID categoryId);
-
-    Item findBySubcategoryId(UUID subcategoryId);
 
     Item findByManufactureDate(Date manufactureDate);
 
     Item findByExpireDate(Date expireDate);
+    
+    Item findByBrand(String brand);
 
-    Item findByEmployeeId(UUID employeeId);
+    Item findByUserId(UUID userId);
 }
