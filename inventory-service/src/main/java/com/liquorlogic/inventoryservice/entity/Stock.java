@@ -10,10 +10,7 @@ import lombok.ToString;
 import java.util.Date;
 import java.util.UUID;
 
-/**
- * @author Nipuna Ruwan.
- *  
- */
+
 @Data
 @Entity
 @ToString
@@ -25,8 +22,11 @@ public class Stock {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "STOCK_ID")
     private UUID stockId;
-    @Column(name = "SUPPLIER_ID")
-    private String supplierId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SUPPLIER_ID")
+    private Supplier supplier;
+
     @Column(name = "BRANDID")
     private UUID brandId;
     @Column(name = "DISCRIPTION")

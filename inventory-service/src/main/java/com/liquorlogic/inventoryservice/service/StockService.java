@@ -3,6 +3,7 @@ package com.liquorlogic.inventoryservice.service;
 import com.liquorlogic.inventoryservice.entity.Stock;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -11,7 +12,7 @@ import java.util.UUID;
  */
 public interface StockService {
     List<Stock> getAllStocks();
-    Stock getStockById(UUID stockId);
+    Optional<Stock> getStockById(UUID stockId);
     Stock createStock(Stock stock);
-    void deleteStock(UUID stockId);
+    boolean deleteStock(Stock stock);
 }
