@@ -24,9 +24,9 @@ public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "STOCK_ID")
-    private UUID stock_Id;
+    private UUID stockId;
     @Column(name = "SUPPLIER_ID")
-    private String supplier_Id;
+    private String supplierId;
     @Column(name = "BRANDID")
     private UUID brandId;
     @Column(name = "DISCRIPTION")
