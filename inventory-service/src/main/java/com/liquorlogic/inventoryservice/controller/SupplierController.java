@@ -28,9 +28,8 @@ public class SupplierController {
     public ResponseEntity saveSupplier(@RequestBody Map<String, String> credentials) {
         loggerLog4J.info("Start register");
         try {
-            String[] requiredFields = {"id", "item_id", "supplier_name", "email", "contact", "status", "qty_revieved_items",
-                    "buying_price", "payment", "payment_method", "create",
-                    "update", "qty_reterned_items", "total_qty"};
+            String[] requiredFields = { "item_id", "supplier_name", "email", "contact", "status", "qty_revieved_items",
+                    "buying_price", "payment", "payment_method", "qty_reterned_items", "total_qty"};
 
             validateMap(credentials, requiredFields);
 
@@ -44,7 +43,7 @@ public class SupplierController {
                 }
             }
 
-            supplier.setId(UUID.fromString(credentials.get("id")));
+
             supplier.setItem_id(String.valueOf(UUID.fromString(credentials.get("item_id"))));
             supplier.setEmail(credentials.get("email"));
             supplier.setSupplier_name(credentials.get("supplier_name"));
@@ -56,13 +55,10 @@ public class SupplierController {
             supplier.setQty_reterned_items(Integer.parseInt(credentials.get("qty_reterned_items")));
             supplier.setContact(credentials.get("contact"));
             supplier.setPayment_method(credentials.get("payment_method"));
-            supplier.setBuying_price(Double.parseDouble(credentials.get("buying_price")));
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date update_date = dateFormat.parse(credentials.get("update"));
-            supplier.setUpdate(update_date);
+
 
             Date currentDate = new Date();
-            supplier.setCreate(currentDate);
+            supplier.setUpdate(currentDate);
             if (supplierId == null) {
                 supplier.setCreate(currentDate);
             }
