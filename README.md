@@ -5,7 +5,7 @@
     <h3>1) Inventory Service</h3>
     <ul>
         <li><strong>Description</strong>: Manages the inventory, including stock and suppliers.</li>
-        <li><strong>Tech Stack</strong>: Java, Spring Boot, PostgreSQL</li>
+        <li><strong>Tech Stack</strong>: Java, Spring Boot</li>
     </ul>
     <h4>Endpoints:</h4>
    <h5>Stock: <code>/api/stock</code></h5>
