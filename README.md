@@ -49,9 +49,8 @@
     </ul>
         <h3>3) User Service</h3>
     <ul>
-        <li><strong>Endpoint</strong>: <code>/api/users</code></li>
         <li><strong>Description</strong>: Manages user accounts and authentication.</li>
-        <li><strong>Tech Stack</strong>: Java, Spring Boot, MySQL</li>
+        <li><strong>Tech Stack</strong>: Java, Spring Boot</li>
     </ul>
    <h4>Endpoints:</h4>
    <h5>User:<code>/api/user</code></h5>
