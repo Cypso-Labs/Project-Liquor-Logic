@@ -11,10 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- * @author Nipuna Ruwan.
- *  
- */
+
 @Service
 @RequiredArgsConstructor
 public class StockServiceImpl implements StockService {
@@ -41,4 +38,9 @@ public class StockServiceImpl implements StockService {
         stockRepository.delete(stock);
         return true;
     }
+
+//    @Override
+//    public Stock findByItemId(UUID itemId) {
+//        return stockRepository.findByItemId(itemId) ;
+//    }
 }

@@ -5,11 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-/**
- * @author Nipuna Ruwan.
- *  
- */
+
+
+
 public interface StockRepository extends JpaRepository<Stock, UUID> {
+    Stock findByItemId(UUID itemId);
     //Stock findByStockId(UUID stockId);
 
 }

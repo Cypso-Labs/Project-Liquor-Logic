@@ -135,6 +135,26 @@ public class StockController {
         }
     }
 
+//    @PostMapping ("/itemId")
+//    public ResponseEntity <Stock> findByItemId (@RequestParam UUID itemId){
+//        loggerLog4J.info("Start findByItemId");
+//        try {
+//            loggerLog4J.info("End findByItemId");
+//            Stock stock = stockService.findByItemId(itemId);
+//            if (stock != null) {
+//                return ResponseEntity.ok(stock);
+//            } else {
+//                return ResponseEntity.notFound().build();
+//            }
+//
+//        } catch (Exception e) {
+//            handleException(e);
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
+//
+//    }
+
+
 
     private void validateMap(Map<String, String> assetCategoryMap, String[] requiredFileds) {
 

@@ -5,6 +5,7 @@ import com.liquorlogic.inventoryservice.entity.Stock;
 import com.liquorlogic.inventoryservice.service.StockService;
 import com.liquorlogic.posservice.entity.Order;
 import com.liquorlogic.posservice.enums.OrderStatus;
+import com.liquorlogic.posservice.repository.ItemRepository;
 import com.liquorlogic.posservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
@@ -24,8 +25,8 @@ public class OrderController {
 
     @Autowired
     private final OrderService orderService;
-//    @Autowired
-//    private final StockService stockService;
+    @Autowired
+    private ItemRepository itemRepository;
 
 
     private static final org.apache.logging.log4j.Logger loggerLog4J = LogManager.getLogger(OrderController.class);
@@ -230,68 +231,14 @@ public class OrderController {
 
     }
 
-//    @PostMapping("/placeOrder")
-//    public ResponseEntity<String> placeOrder(@RequestBody Map<String, Object> orderRequest) {
-//        loggerLog4J.info("Start placeOrder");
-//        try {
-//            // Extract order details from request
-//            UUID userId = UUID.fromString(orderRequest.get("userId").toString());
-//            List<Map<String, Object>> items = (List<Map<String, Object>>) orderRequest.get("items");
-//
-//            // Validate input parameters
-//            if (items == null || items.isEmpty()) {
-//                return ResponseEntity.badRequest().build();
-//            }
-//
-//            // Create a new order
-//            Order order = new Order();
-//            order.setUserId(userId);
-//            order.setCreateDate(new Date());
-//            order.setStatus(OrderStatus.Pending);
-//
-//            // Calculate total amount and add items to the order
-//            double totalAmount = 0.0;
-//            for (Map<String, Object> item : items) {
-//                UUID itemId = UUID.fromString(item.get("itemId").toString());
-//                int quantity = Integer.parseInt(item.get("quantity").toString());
-//
-//                Stock stock = stockService.findByItemId(itemId);
-//                if (stock == null) {
-//                    loggerLog4J.error("Item not found in stock: " + itemId);
-//                    return ResponseEntity.notFound().build();
-//                }
-//
-//                // Deduct the ordered quantity from stock quantity
-//                int availableQuantity = stock.getQTY();
-//                if (availableQuantity < quantity) {
-//                    loggerLog4J.error("Insufficient quantity in stock for item: " + itemId);
-//                    return ResponseEntity.badRequest().body("Insufficient quantity in stock for item: " + itemId);
-//                }
-//                stock.setQTY(availableQuantity - quantity);
-//                stockService.createStock(stock);
-//
-//                // Update total amount for the order
-//                totalAmount += stock.getBuying_price() * quantity;
-//
-//                // Add the item to the order
-//                // You might want to enhance this to track individual items in the order
-//                // For simplicity, we're just adding item IDs and quantities to the order entity
-//                order.addItem(itemId, quantity);
-//            }
-//
-//            // Set the total amount for the order
-//            order.setTotalAmount(totalAmount);
-//
-//            // Save the order
-//            Order savedOrder = orderService.saveOrder(order);
-//            loggerLog4J.info("End placeOrder");
-//            return ResponseEntity.ok(savedOrder);
-//        } catch (Exception e) {
-//            loggerLog4J.error("Error occurred while placing order", e);
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//        }
-//    }
-
+    @PostMapping("/placeOrder")
+    public Order placeOrder(@RequestParam UUID itemId, @RequestParam UUID userId, @RequestParam int qty) {
+        try {
+            return orderService.placeOrder(itemId, userId, qty);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 
 
     private void handleException(Exception e) {

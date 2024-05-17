@@ -18,7 +18,7 @@ public interface OrderService {
     Order findByStatus (OrderStatus status);
     Order findByCreateDate (Date createDate);
     Order findByUpdateDate (Date updateDate);
-//    Order placeOrder(UUID userId, List<Map<String, Object>> items);
-//    Order addItem(UUID itemId, int quantity, double totalAmount) ;
 
+
+    Order placeOrder(UUID itemId, UUID userId, int qty) throws Exception;
 }
