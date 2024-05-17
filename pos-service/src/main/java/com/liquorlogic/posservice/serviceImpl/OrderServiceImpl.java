@@ -9,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 
 @Service
@@ -68,6 +65,18 @@ public class OrderServiceImpl implements OrderService {
     public Order findByUpdateDate(Date updateDate) {
         return orderRepository.findByUpdateDate(updateDate);
     }
+
+//    @Override
+//    public Order placeOrder(UUID userId, List<Map<String, Object>> items) {
+//        Order order = new Order();
+//        order.setUserId(userId);
+//        return orderRepository.save(order);
+//    }
+
+//    @Override
+//    public Order addItem(UUID itemId, int quantity, double totalAmount) {
+//        return orderRepository.save(itemId,quantity,totalAmount  );
+//    }
 }
 
 

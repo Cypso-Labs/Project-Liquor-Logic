@@ -15,6 +15,7 @@ import java.util.*;
 
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/item")
 @RequiredArgsConstructor
 public class ItemController {

@@ -15,4 +15,6 @@ public interface StockService {
     Optional<Stock> getStockById(UUID stockId);
     Stock createStock(Stock stock);
     boolean deleteStock(Stock stock);
+
+    Stock findByItemId(UUID itemId);
 }

@@ -21,6 +21,7 @@ import java.util.*;
  *  
  */
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/stock")
 @RequiredArgsConstructor
 public class StockController {
