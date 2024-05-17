@@ -21,6 +21,7 @@ import java.util.*;
  *  
  */
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/stock")
 @RequiredArgsConstructor
 public class StockController {
@@ -29,7 +30,7 @@ public class StockController {
     private final StockService stockService;
 
     @Autowired
-    private SupplierService supplierService;
+    private final SupplierService supplierService;
 
     private static final org.apache.logging.log4j.Logger loggerLog4J = LogManager.getLogger(StockController.class);
 
@@ -55,8 +56,6 @@ public class StockController {
             Supplier supplier = supplierService.findBySupplierId(supplierId).orElseThrow(() -> new RuntimeException("Supplier not found"));
             stock.setSupplier(supplier);
             stock.setBrandId(UUID.fromString(credentials.get("brandId")));
-            stock.setDiscription(credentials.get("description"));
-            stock.setImage(credentials.get("image"));
             stock.setQTY(Integer.parseInt(credentials.get("QTY")));
             stock.setCreateBy(credentials.get("createBy"));
             stock.setUpdateBy(credentials.get("updateBy"));
@@ -133,6 +132,26 @@ public class StockController {
 
         }
     }
+
+//    @PostMapping ("/itemId")
+//    public ResponseEntity <Stock> findByItemId (@RequestParam UUID itemId){
+//        loggerLog4J.info("Start findByItemId");
+//        try {
+//            loggerLog4J.info("End findByItemId");
+//            Stock stock = stockService.findByItemId(itemId);
+//            if (stock != null) {
+//                return ResponseEntity.ok(stock);
+//            } else {
+//                return ResponseEntity.notFound().build();
+//            }
+//
+//        } catch (Exception e) {
+//            handleException(e);
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
+//
+//    }
+
 
 
     private void validateMap(Map<String, String> assetCategoryMap, String[] requiredFileds) {

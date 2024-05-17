@@ -1,8 +1,11 @@
 package com.liquorlogic.posservice.controller;
 
 
+import com.liquorlogic.inventoryservice.entity.Stock;
+import com.liquorlogic.inventoryservice.service.StockService;
 import com.liquorlogic.posservice.entity.Order;
 import com.liquorlogic.posservice.enums.OrderStatus;
+import com.liquorlogic.posservice.repository.ItemRepository;
 import com.liquorlogic.posservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
@@ -15,12 +18,17 @@ import java.util.*;
 
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/order")
 @RequiredArgsConstructor
 public class OrderController {
 
     @Autowired
     private final OrderService orderService;
+    @Autowired
+    private ItemRepository itemRepository;
+
+
     private static final org.apache.logging.log4j.Logger loggerLog4J = LogManager.getLogger(OrderController.class);
 
 
@@ -221,6 +229,15 @@ public class OrderController {
         }
 
 
+    }
+
+    @PostMapping("/placeOrder")
+    public Order placeOrder(@RequestParam UUID itemId, @RequestParam UUID userId, @RequestParam int qty) {
+        try {
+            return orderService.placeOrder(itemId, userId, qty);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
 
