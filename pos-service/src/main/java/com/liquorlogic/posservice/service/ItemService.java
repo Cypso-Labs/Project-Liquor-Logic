@@ -18,13 +18,7 @@ public interface ItemService {
 
     Item findBySupplierId(UUID supplierId);
 
-    Item findByBrandId(UUID brandId);
-
-    Item findByCategoryId(UUID categoryId);
-
-    Item findBySubcategoryId(UUID subcategoryId);
-
-    Item findBySKU(String SKU);
+    Item findByBrand(String brand);
 
     Item findByUnitPrice(Double unitPrice);
 
@@ -34,5 +28,5 @@ public interface ItemService {
 
     Item findByExpireDate(Date expireDate);
 
-    Item itemCreatedBy (UUID employeeId);
+    Item findByUserId (UUID userId);
 }

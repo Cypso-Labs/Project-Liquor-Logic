@@ -46,24 +46,10 @@ public class ItemServiceImpl implements ItemService {
         return itemRepository.findBySupplierId(supplierId);
     }
 
-    @Override
-    public Item findByBrandId(UUID brandId) {
-        return itemRepository.findByBrandId(brandId);
-    }
 
     @Override
-    public Item findByCategoryId(UUID categoryId) {
-        return itemRepository.findByCategoryId(categoryId);
-    }
-
-    @Override
-    public Item findBySubcategoryId(UUID subcategoryId) {
-        return itemRepository.findBySubcategoryId(subcategoryId);
-    }
-
-    @Override
-    public Item findBySKU(String SKU) {
-        return itemRepository.findBySKU(SKU);
+    public Item findByBrand(String brand) {
+        return itemRepository.findByBrand(brand);
     }
 
     @Override
@@ -87,7 +73,9 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item itemCreatedBy(UUID employeeId) {
-        return itemRepository.findByEmployeeId(employeeId);
+    public Item findByUserId(UUID userId) {
+        return itemRepository.findByUserId(userId);
     }
+
+
 }

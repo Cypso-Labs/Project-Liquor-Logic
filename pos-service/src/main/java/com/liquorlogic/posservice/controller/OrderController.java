@@ -28,8 +28,7 @@ public class OrderController {
     public ResponseEntity<Order> saveOrder(@RequestBody Map<String, String> credentials) {
         loggerLog4J.info("Start saveOrder");
         try {
-            String[] requiredFileds = {"customerId","itemId","employeeId","qty",
-                    "createDate","updateDate", "totalAmount", "shippingAddress", "status"};
+            String[] requiredFileds = {"itemId","userId","qty","totalAmount","status"};
             validateMap(credentials, requiredFileds);
 
             Order order = new Order();
@@ -42,12 +41,11 @@ public class OrderController {
 
                 }
             }
-            order.setCustomerId(UUID.fromString(credentials.get("customerId")));
+
             order.setItemId(UUID.fromString(credentials.get("itemId")));
-            order.setEmployeeId(UUID.fromString(credentials.get("employeeId")));
+            order.setUserId(UUID.fromString(credentials.get("userId")));
             order.setQty(Integer.parseInt(credentials.get("qty")));
             order.setTotalAmount(Double.parseDouble(credentials.get("totalAmount")));
-            order.setShippingAddress(credentials.get("shippingAddress"));
             order.setStatus(OrderStatus.valueOf(credentials.get("status")));
 
 
@@ -124,25 +122,7 @@ public class OrderController {
         }
 
     }
-    @PostMapping("/customerId")
-    public ResponseEntity<Order> findByCustomerId (@RequestParam UUID customerId){
-        loggerLog4J.info("Start findByCustomerId");
-        try {
-            loggerLog4J.info("End findByCustomerId");
-            Order order = orderService.findByCustomerId(customerId);
-            if (order != null) {
-                return ResponseEntity.ok(order);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
 
-        } catch (Exception e) {
-            handleException(e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-
-
-    }
     @PostMapping("/itemId")
     public ResponseEntity<Order> findByItemId (@RequestParam UUID itemId){
         loggerLog4J.info("Start findByItemId");
@@ -163,12 +143,12 @@ public class OrderController {
 
     }
 
-    @PostMapping("/employeeId")
-    public ResponseEntity<Order> findByEmployeeId (@RequestParam UUID employeeId){
-        loggerLog4J.info("Start findByEmployeeId");
+    @PostMapping("/userId")
+    public ResponseEntity<Order> findByUserId (@RequestParam UUID userId){
+        loggerLog4J.info("Start findByUserId");
         try {
-            loggerLog4J.info("End findByEmployeeId");
-            Order order = orderService.findByEmployeeId(employeeId);
+            loggerLog4J.info("End findByUserId");
+            Order order = orderService.findByUserId(userId);
             if (order != null) {
                 return ResponseEntity.ok(order);
             } else {
@@ -209,6 +189,26 @@ public class OrderController {
         try {
             loggerLog4J.info("End findByCreateDate");
             Order order = orderService.findByCreateDate(createDate);
+            if (order != null) {
+                return ResponseEntity.ok(order);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+
+        } catch (Exception e) {
+            handleException(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+
+    }
+
+    @PostMapping("/updateDate")
+    public ResponseEntity<Order> findByUpdateDate (@RequestParam Date updateDate){
+        loggerLog4J.info("Start findByUpdateDate");
+        try {
+            loggerLog4J.info("End findByCreateDate");
+            Order order = orderService.findByUpdateDate(updateDate);
             if (order != null) {
                 return ResponseEntity.ok(order);
             } else {

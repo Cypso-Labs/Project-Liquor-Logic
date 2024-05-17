@@ -10,13 +10,14 @@ import java.util.UUID;
 
 
 public interface OrderRepository extends JpaRepository<Order, UUID> {
-    Order findByCustomerId(UUID customerId);
 
     Order findByItemId(UUID itemId);
 
-    Order findByEmployeeId(UUID employeeId);
+    Order findByUserId(UUID userId);
 
     Order findByStatus(OrderStatus status);
 
     Order findByCreateDate(Date createDate);
+
+    Order findByUpdateDate(Date updateDate);
 }
