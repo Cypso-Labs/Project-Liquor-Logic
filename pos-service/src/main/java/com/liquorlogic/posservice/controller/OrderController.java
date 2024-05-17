@@ -125,12 +125,14 @@ public class OrderController {
         try {
             loggerLog4J.info("End findByOrderId ");
             Optional<Order> order = orderService.findByOrderId(orderId);
+//
+//            if (order.isPresent()) {
+//                return ResponseEntity.ok(Optional.of(order.get()));
+//            } else {
+//                return ResponseEntity.notFound().build();
+//            }
 
-            if (order.isPresent()) {
-                return ResponseEntity.ok(Optional.of(order.get()));
-            } else {
-                return ResponseEntity.notFound().build();
-            }
+
         } catch (Exception e) {
             handleException(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
