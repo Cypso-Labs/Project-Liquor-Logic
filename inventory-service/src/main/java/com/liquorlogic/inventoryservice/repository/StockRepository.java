@@ -9,7 +9,6 @@ import java.util.UUID;
 
 
 public interface StockRepository extends JpaRepository<Stock, UUID> {
-    Stock findByItemId(UUID itemId);
-    //Stock findByStockId(UUID stockId);
+
 
 }

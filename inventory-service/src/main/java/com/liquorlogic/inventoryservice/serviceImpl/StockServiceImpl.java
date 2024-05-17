@@ -39,8 +39,5 @@ public class StockServiceImpl implements StockService {
         return true;
     }
 
-//    @Override
-//    public Stock findByItemId(UUID itemId) {
-//        return stockRepository.findByItemId(itemId) ;
-//    }
+
 }
