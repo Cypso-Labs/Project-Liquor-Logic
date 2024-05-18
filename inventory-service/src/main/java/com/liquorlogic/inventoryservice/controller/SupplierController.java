@@ -104,17 +104,16 @@ public class SupplierController {
     }
 
     @GetMapping("/findSupplier")
-    public ResponseEntity<SupplierDTO> getUser(@RequestParam(required = false) SupplierStatus status,
+    public ResponseEntity<List<Supplier>> getUser(@RequestParam(required = false) SupplierStatus status,
                                                @RequestParam(required = false) UUID supplierId,
                                                @RequestParam(required = false) String contact) {
 
         try {
-            List<Supplier> supplierList;
+            Optional<Supplier> supplierList;
             if (status != null) {
                 supplierList = supplierService.findAllByStatus(status);
             } else if (supplierId != null) {
-                Optional<Supplier> userById = supplierService.findSupplierById(supplierId);
-                supplierList = userById.map(Collections::singletonList).orElseGet(Collections::emptyList);
+                supplierList = supplierService.findSupplierById(supplierId);
             } else if (contact != null) {
                 supplierList = supplierService.findByContact(contact);
             } else {
@@ -122,9 +121,8 @@ public class SupplierController {
             }
 
             if (!supplierList.isEmpty()) {
-                SupplierDTO responseUser = convertToResponseSupplierData(supplierList.get(0));
                 loggerLog4J.info("End getUser");
-                return ResponseEntity.ok(responseUser);
+                return ResponseEntity.ok(Collections.singletonList(supplierList.get()));
             } else {
                 loggerLog4J.info("End getUser");
                 return ResponseEntity.noContent().build();
