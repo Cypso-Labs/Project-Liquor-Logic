@@ -1,6 +1,7 @@
 package com.liquorlogic.posservice.serviceImpl;
 
 
+import com.liquorlogic.inventoryservice.entity.Stock;
 import com.liquorlogic.posservice.entity.Item;
 import com.liquorlogic.posservice.entity.Order;
 import com.liquorlogic.posservice.enums.OrderStatus;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.*;
 
@@ -20,6 +22,7 @@ import java.util.*;
 
 public class OrderServiceImpl implements OrderService {
 
+    private WebClient webClient;
     @Autowired
     private final OrderRepository orderRepository;
 
@@ -72,9 +75,11 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findByUpdateDate(updateDate);
     }
 
+
     @Transactional
-    public Order placeOrder(UUID itemId,UUID userId , int orderQty) throws Exception {
+    public Order placeOrder(UUID itemId, UUID userId, int orderQty) throws Exception {
         // Retrieve the item from the repository
+
         Optional<Item> optionalItem = itemRepository.findById(itemId);
         if (!optionalItem.isPresent()) {
             throw new Exception("Item not found");

@@ -1,6 +1,7 @@
 package com.liquorlogic.inventoryservice.controller;
 
 import com.liquorlogic.inventoryservice.dto.SupplierDTO;
+import com.liquorlogic.inventoryservice.entity.Stock;
 import com.liquorlogic.inventoryservice.entity.Supplier;
 import com.liquorlogic.inventoryservice.enums.SupplierStatus;
 import com.liquorlogic.inventoryservice.service.SupplierService;
@@ -10,7 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.reactive.function.client.WebClient;
+import com.liquorlogic.posservice.entity.Item;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -22,18 +24,36 @@ public class SupplierController {
     @Autowired
     private final SupplierService supplierService;
 
+    private WebClient webClient;
     private static final org.apache.logging.log4j.Logger loggerLog4J = LogManager.getLogger(SupplierController.class);
 
     //    REGISTER/UPDATE
     @PostMapping("/save")
     public ResponseEntity saveSupplier(@RequestBody Map<String, String> credentials) {
         loggerLog4J.info("Start register");
+
+//        Item item = webClient.get()
+//                .uri("")
+//                .retrieve()
+//                .bodyToMono(Item.class)
+//                .block();
+
         try {
             String[] requiredFields = { "item_id", "supplier_name", "email", "contact", "status", "qty_revieved_items",
                     "buying_price", "payment", "payment_method",
                      "qty_reterned_items", "total_qty"};
 
             validateMap(credentials, requiredFields);
+
+            Item item = webClient.get()
+                    .uri("/api/item/{itemId}", credentials.get("item_id"))
+                    .retrieve()
+                    .bodyToMono(Item.class)
+                    .block();
+
+            if (item == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Item not found");
+            }
 
             Supplier supplier = new Supplier();
             UUID supplierId = credentials.get("id") != null ? UUID.fromString(credentials.get("id")) : null;
