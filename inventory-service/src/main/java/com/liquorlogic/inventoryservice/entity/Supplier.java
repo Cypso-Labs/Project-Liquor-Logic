@@ -1,5 +1,6 @@
 package com.liquorlogic.inventoryservice.entity;
 
+import com.liquorlogic.inventoryservice.entity.Enum.Status;
 import com.liquorlogic.inventoryservice.enums.SupplierStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,7 @@
 package com.liquorlogic.inventoryservice.controller;
 
 import com.liquorlogic.inventoryservice.dto.SupplierDTO;
+import com.liquorlogic.inventoryservice.entity.Enum.Status;
 import com.liquorlogic.inventoryservice.entity.Supplier;
 import com.liquorlogic.inventoryservice.enums.SupplierStatus;
 import com.liquorlogic.inventoryservice.service.SupplierService;
@@ -26,15 +27,12 @@ public class SupplierController {
 
     //    REGISTER/UPDATE
     @PostMapping("/save")
-    public ResponseEntity saveSupplier(@RequestBody Map<String, String> credentials) {
+    public ResponseEntity<Supplier> saveSupplier(@RequestBody Map<String, String> credentials) {
         loggerLog4J.info("Start register");
         try {
-            String[] requiredFields = { "item_id", "supplier_name", "email", "contact", "status", "qty_revieved_items",
-
-                    "buying_price", "payment", "payment_method", "qty_reterned_items", "total_qty",
-
-                    "buying_price", "payment", "payment_method",
-                     "qty_reterned_items", "total_qty"};
+            String[] requiredFields = {"item_id", "supplier_name", "email", "contact", "qty_revieved_items",
+                    "buying_price", "payment", "payment_method", "qty_reterned_items", "total_qty", "buying_price", "payment", "payment_method",
+                    "qty_reterned_items", "total_qty"};
 
 
             validateMap(credentials, requiredFields);
@@ -53,7 +51,7 @@ public class SupplierController {
             supplier.setItem_id(String.valueOf(UUID.fromString(credentials.get("item_id"))));
             supplier.setEmail(credentials.get("email"));
             supplier.setSupplier_name(credentials.get("supplier_name"));
-            supplier.setStatus(SupplierStatus.valueOf(credentials.get("status")));
+            supplier.setStatus(SupplierStatus.paid);
             supplier.setPayment(Double.parseDouble(credentials.get("payment")));
             supplier.setPayment_method(credentials.get("payment_method"));
             supplier.setTotal_qty(Integer.parseInt(credentials.get("total_qty")));
@@ -61,7 +59,6 @@ public class SupplierController {
             supplier.setQty_reterned_items(Integer.parseInt(credentials.get("qty_reterned_items")));
             supplier.setContact(credentials.get("contact"));
             supplier.setPayment_method(credentials.get("payment_method"));
-
 
 
             supplier.setBuying_price(Double.parseDouble(credentials.get("buying_price")));
@@ -82,7 +79,12 @@ public class SupplierController {
         }
     }
 
-    private void validateMap(Map<String, String> credentials, String[] requiredFields) {
+    private void validateMap(Map<String, String> assetCategoryMap,String[] requiredFields) {
+        for (String field : requiredFields) {
+            if (assetCategoryMap.get(field) == null || assetCategoryMap.get(field).isEmpty()) {
+                throw new IllegalArgumentException("Not found " + field);
+            }
+        }
     }
 
 

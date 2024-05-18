@@ -53,15 +53,13 @@ public class StockController {
                 }
             }
             UUID supplierId =(UUID.fromString(credentials.get("supplierId")));
-            Supplier supplier = supplierService.findBySupplierId(supplierId).orElseThrow(() -> new RuntimeException("Supplier not found"));
-            stock.setSupplier(supplier);
+            Optional<Supplier> supplier = supplierService.findBySupplierId(supplierId);
+            supplier.ifPresent(stock::setSupplier);
             stock.setBrandId(UUID.fromString(credentials.get("brandId")));
             stock.setQTY(Integer.parseInt(credentials.get("QTY")));
             stock.setCreateBy(credentials.get("createBy"));
             stock.setUpdateBy(credentials.get("updateBy"));
-            stock.setStatus(Status.valueOf(credentials.get("status")));
-
-
+            stock.setStatus(Status.In_Stock);
 
             Date currentDate = new Date();
             stock.setUpdateDate(currentDate);
@@ -155,7 +153,6 @@ public class StockController {
 
 
     private void validateMap(Map<String, String> assetCategoryMap, String[] requiredFileds) {
-
         for (String field : requiredFileds) {
             if (assetCategoryMap.get(field) == null || assetCategoryMap.get(field).isEmpty()) {
                 throw new IllegalArgumentException("Not found " + field);
