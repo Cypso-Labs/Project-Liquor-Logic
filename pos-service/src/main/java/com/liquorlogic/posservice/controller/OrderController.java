@@ -112,10 +112,7 @@ public class OrderController {
         } catch (Exception e) {
             handleException(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-
         }
-
-
     }
     @PostMapping ("/orderId")
     public ResponseEntity <Optional<Order>> findByOrderId (@RequestParam UUID orderId){
@@ -135,7 +132,6 @@ public class OrderController {
             handleException(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-
     }
 
     @PostMapping("/itemId")
@@ -154,8 +150,6 @@ public class OrderController {
             handleException(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-
-
     }
 
     @PostMapping("/userId")
@@ -174,8 +168,6 @@ public class OrderController {
             handleException(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-
-
     }
 
     @PostMapping("/status")
@@ -194,8 +186,6 @@ public class OrderController {
             handleException(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-
-
     }
 
     @PostMapping("/createDate")
@@ -214,8 +204,6 @@ public class OrderController {
             handleException(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-
-
     }
 
     @PostMapping("/updateDate")
@@ -238,21 +226,10 @@ public class OrderController {
 
     }
 
-    @PostMapping("/placeOrder")
-    public Order placeOrder(@RequestParam UUID itemId, UUID userId,  @RequestParam int qty) {
-        try {
-            return orderService.placeOrder(itemId,userId, qty);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
-
-
     private void handleException(Exception e) {
         loggerLog4J.error("Error ", e);
         e.printStackTrace();
     }
-
 
     private void validateMap(Map<String, String> assetCategoryMap, String[] requiredFields) {
         for (String field : requiredFields) {
