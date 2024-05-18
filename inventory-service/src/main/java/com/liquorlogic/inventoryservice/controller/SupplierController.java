@@ -30,8 +30,12 @@ public class SupplierController {
         loggerLog4J.info("Start register");
         try {
             String[] requiredFields = { "item_id", "supplier_name", "email", "contact", "status", "qty_revieved_items",
+
+                    "buying_price", "payment", "payment_method", "qty_reterned_items", "total_qty",
+
                     "buying_price", "payment", "payment_method",
                      "qty_reterned_items", "total_qty"};
+
 
             validateMap(credentials, requiredFields);
 
@@ -45,6 +49,7 @@ public class SupplierController {
                 }
             }
 
+
             supplier.setItem_id(String.valueOf(UUID.fromString(credentials.get("item_id"))));
             supplier.setEmail(credentials.get("email"));
             supplier.setSupplier_name(credentials.get("supplier_name"));
@@ -56,7 +61,11 @@ public class SupplierController {
             supplier.setQty_reterned_items(Integer.parseInt(credentials.get("qty_reterned_items")));
             supplier.setContact(credentials.get("contact"));
             supplier.setPayment_method(credentials.get("payment_method"));
+
+
+
             supplier.setBuying_price(Double.parseDouble(credentials.get("buying_price")));
+
 
             Date currentDate = new Date();
             supplier.setUpdate(currentDate);
