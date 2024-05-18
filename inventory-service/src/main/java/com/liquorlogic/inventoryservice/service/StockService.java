@@ -13,5 +13,5 @@ public interface StockService {
     Stock createStock(Stock stock);
     boolean deleteStock(Stock stock);
 
-//    Stock findByItemId(UUID itemId);
+
 }

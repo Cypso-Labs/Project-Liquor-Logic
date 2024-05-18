@@ -73,7 +73,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Transactional
-    public Order placeOrder(UUID itemId, UUID userId, int orderQty) throws Exception {
+    public Order placeOrder(UUID itemId,UUID userId , int orderQty) throws Exception {
         // Retrieve the item from the repository
         Optional<Item> optionalItem = itemRepository.findById(itemId);
         if (!optionalItem.isPresent()) {

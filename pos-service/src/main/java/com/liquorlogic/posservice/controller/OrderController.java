@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.*;
 
@@ -27,6 +28,8 @@ public class OrderController {
     private final OrderService orderService;
     @Autowired
     private ItemRepository itemRepository;
+    @Autowired
+    private WebClient webClient;
 
 
     private static final org.apache.logging.log4j.Logger loggerLog4J = LogManager.getLogger(OrderController.class);
@@ -34,6 +37,8 @@ public class OrderController {
 
     @PostMapping("/save")
     public ResponseEntity<Order> saveOrder(@RequestBody Map<String, String> credentials) {
+
+
         loggerLog4J.info("Start saveOrder");
         try {
             String[] requiredFileds = {"itemId","userId","qty","totalAmount","status"};
@@ -64,6 +69,7 @@ public class OrderController {
                 order.setCreateDate(currentDate);
             }
             return ResponseEntity.ok(orderService.saveOrder(order));
+
         } catch (Exception e) {
             handleException(e);
             loggerLog4J.error("Error Occurred while saving Order");
@@ -119,11 +125,14 @@ public class OrderController {
         try {
             loggerLog4J.info("End findByOrderId ");
             Optional<Order> order = orderService.findByOrderId(orderId);
+
             if (order.isPresent()) {
                 return ResponseEntity.ok(Optional.of(order.get()));
             } else {
                 return ResponseEntity.notFound().build();
             }
+
+
         } catch (Exception e) {
             handleException(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -232,9 +241,9 @@ public class OrderController {
     }
 
     @PostMapping("/placeOrder")
-    public Order placeOrder(@RequestParam UUID itemId, @RequestParam UUID userId, @RequestParam int qty) {
+    public Order placeOrder(@RequestParam UUID itemId, UUID userId,  @RequestParam int qty) {
         try {
-            return orderService.placeOrder(itemId, userId, qty);
+            return orderService.placeOrder(itemId,userId, qty);
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
