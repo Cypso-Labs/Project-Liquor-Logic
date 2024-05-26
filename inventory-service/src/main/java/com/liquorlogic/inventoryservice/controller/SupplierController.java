@@ -30,10 +30,10 @@ public class SupplierController {
     public ResponseEntity<Supplier> saveSupplier(@RequestBody Map<String, String> credentials) {
         loggerLog4J.info("Start register");
         try {
-            String[] requiredFields = {"item_id", "supplier_name", "email", "contact", "qty_revieved_items",
-                    "buying_price", "payment", "payment_method", "qty_reterned_items", "total_qty", "buying_price", "payment", "payment_method",
-                    "qty_reterned_items", "total_qty"};
-
+            String[] requiredFields = {
+                    "item_id", "supplier_name", "email", "contact", "qty_received_items",
+                    "buying_price", "payment", "payment_method", "qty_returned_items", "total_qty"
+            };
 
             validateMap(credentials, requiredFields);
 
@@ -47,35 +47,31 @@ public class SupplierController {
                 }
             }
 
-
-            supplier.setItem_id(String.valueOf(UUID.fromString(credentials.get("item_id"))));
+            supplier.setItemId(UUID.fromString(credentials.get("item_id")).toString());
             supplier.setEmail(credentials.get("email"));
-            supplier.setSupplier_name(credentials.get("supplier_name"));
-            supplier.setStatus(SupplierStatus.paid);
-            supplier.setPayment(Double.parseDouble(credentials.get("payment")));
-            supplier.setPayment_method(credentials.get("payment_method"));
-            supplier.setTotal_qty(Integer.parseInt(credentials.get("total_qty")));
-            supplier.setQty_revieved_items(Integer.parseInt(credentials.get("qty_revieved_items")));
-            supplier.setQty_reterned_items(Integer.parseInt(credentials.get("qty_reterned_items")));
+            supplier.setSupplierName(credentials.get("supplier_name"));
             supplier.setContact(credentials.get("contact"));
-            supplier.setPayment_method(credentials.get("payment_method"));
-
-
-            supplier.setBuying_price(Double.parseDouble(credentials.get("buying_price")));
-
+            supplier.setQtyReceivedItems(Integer.parseInt(credentials.get("qty_received_items")));
+            supplier.setBuyingPrice(Double.parseDouble(credentials.get("buying_price")));
+            supplier.setPayment(Double.parseDouble(credentials.get("payment")));
+            supplier.setPaymentMethod(credentials.get("payment_method"));
+            supplier.setQtyReturnedItems(Integer.parseInt(credentials.get("qty_returned_items")));
+            supplier.setTotalQty(Integer.parseInt(credentials.get("total_qty")));
+            supplier.setStatus(SupplierStatus.paid);
 
             Date currentDate = new Date();
             supplier.setUpdate(currentDate);
             if (supplierId == null) {
                 supplier.setCreate(currentDate);
             }
+
             return ResponseEntity.ok(supplierService.saveSupplier(supplier));
         } catch (Exception e) {
             handleException(e);
-            loggerLog4J.info("End registration");
+            loggerLog4J.error("Error occurred while saving supplier", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         } finally {
-            loggerLog4J.info("End saveItem");
+            loggerLog4J.info("End saveSupplier");
         }
     }
 
@@ -148,16 +144,16 @@ public class SupplierController {
     private SupplierDTO convertToResponseSupplierData(Supplier supplier) {
         return new SupplierDTO(
                 supplier.getId(),
-                supplier.getItem_id(),
-                supplier.getSupplier_name(),
+                supplier.getItemId(),
+                supplier.getSupplierName(),
                 supplier.getContact(),
                 supplier.getEmail(),
-                supplier.getQty_revieved_items(),
-                supplier.getQty_reterned_items(),
-                supplier.getTotal_qty(),
-                supplier.getBuying_price(),
+                supplier.getQtyReceivedItems(),
+                supplier.getQtyReturnedItems(),
+                supplier.getTotalQty(),
+                supplier.getBuyingPrice(),
                 supplier.getPayment(),
-                supplier.getPayment_method(),
+                supplier.getPaymentMethod(),
                 supplier.getStatus(),
                 supplier.getCreate(),
                 supplier.getUpdate()

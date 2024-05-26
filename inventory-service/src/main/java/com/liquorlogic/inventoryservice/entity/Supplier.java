@@ -1,6 +1,5 @@
 package com.liquorlogic.inventoryservice.entity;
 
-import com.liquorlogic.inventoryservice.entity.Enum.Status;
 import com.liquorlogic.inventoryservice.enums.SupplierStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,10 +23,10 @@ public class Supplier {
     private UUID id;
 
     @Column(name = "ITEM_ID")
-    private String item_id;
+    private String itemId;
 
     @Column(name = "SUPPLIER_NAME")
-    private String supplier_name;
+    private String supplierName;
 
     @Column(name = "CONTACT")
     private String contact;
@@ -35,25 +34,26 @@ public class Supplier {
     @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "QTY_RECIEVED_ITEMS")
-    private int qty_revieved_items;
+    @Column(name = "QTY_RECEIVED_ITEMS")
+    private int qtyReceivedItems;
 
-    @Column(name = "QTY_RETERNED_ITEMS")
-    private int qty_reterned_items;
+    @Column(name = "QTY_RETURNED_ITEMS")
+    private int qtyReturnedItems;
 
     @Column(name = "TOTAL_QTY")
-    private int total_qty;
+    private int totalQty;
 
     @Column(name = "BUYING_PRICE")
-    private double buying_price;
+    private double buyingPrice;
 
     @Column(name = "PAYMENT")
     private double payment;
 
     @Column(name = "PAYMENT_METHOD")
-    private String payment_method;
+    private String paymentMethod;
 
     @Column(name = "STATUS")
+    @Enumerated(EnumType.STRING)
     private SupplierStatus status;
 
     @Column(name = "CREATE_DATE")
@@ -61,8 +61,4 @@ public class Supplier {
 
     @Column(name = "UPDATE_DATE")
     private Date update;
-
-    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Stock> stocks;
-
 }
